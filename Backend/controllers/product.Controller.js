@@ -1,5 +1,8 @@
 import ProductModel from "../models/product.model.js";
 
+import mongoose from 'mongoose';
+
+
 export const createProductController = async(req,res)=>{
     try {
         const { 
@@ -83,10 +86,10 @@ export const getProductController = async(req,res)=>{
             message : "Product data",
             error : false,
             success : true,
-            totalCount : totalCount,
+            totalCount,
             totalNoPage : Math.ceil( totalCount / limit),
             data : data
-        })
+        })  
     } catch (error) {
         return res.status(500).json({
             message : error.message || error,
@@ -127,56 +130,56 @@ export const getProductByCategory = async(req,res)=>{
     }
 }
 
-export const getProductByCategoryAndSubCategory  = async(req,res)=>{
+export const getProductByCategoryAndSubCategory = async (req, res) => {
     try {
-        const { categoryId,subCategoryId,page,limit } = req.body
+        const { categoryId, subCategoryId, page = 1, limit = 10 } = req.body;
 
-        if(!categoryId || !subCategoryId){
+        // Validate ObjectIds
+        if (!mongoose.Types.ObjectId.isValid(categoryId) || !mongoose.Types.ObjectId.isValid(subCategoryId)) {
             return res.status(400).json({
-                message : "Provide categoryId and subCategoryId",
-                error : true,
-                success : false
-            })
+                message: "Invalid categoryId or subCategoryId",
+                error: true,
+                success: false,
+            });
         }
 
-        if(!page){
-            page = 1
-        }
+        const categoryObjectId = new mongoose.Types.ObjectId(categoryId);
+        const subCategoryObjectId = new mongoose.Types.ObjectId(subCategoryId);
 
-        if(!limit){
-            limit = 10
-        }
+        const skip = (page - 1) * limit;
 
-        const query = {
-            category : { $in :categoryId  },
-            subCategory : { $in : subCategoryId }
-        }
-
-        const skip = (page - 1) * limit
-
-        const [data,dataCount] = await Promise.all([
-            ProductModel.find(query).sort({createdAt : -1 }).skip(skip).limit(limit),
-            ProductModel.countDocuments(query)
-        ])
-
-        return res.json({
-            message : "Product list",
-            data : data,
-            totalCount : dataCount,
-            page : page,
-            limit : limit,
-            success : true,
-            error : false
+        const products = await ProductModel.find({
+            category: categoryObjectId,
+            subCategory: subCategoryObjectId,
         })
+            .skip(skip)
+            .limit(limit)
+            .sort({ createdAt: -1 });
+
+        const totalCount = await ProductModel.countDocuments({
+            category: categoryObjectId,
+            subCategory: subCategoryObjectId,
+        });
+
+        return res.status(200).json({
+            message: "Products fetched successfully",
+            data: products,
+            currentPage: parseInt(page),
+            totalPages: Math.ceil(totalCount / limit),
+            totalCount,
+            error: false,
+            success: true,
+        });
 
     } catch (error) {
+        console.error("Error in getProductByCategoryAndSubCategory:", error);
         return res.status(500).json({
-            message : error.message || error,
-            error : true,
-            success : false
-        })
+            message: error.message || "Something went wrong",
+            error: true,
+            success: false,
+        });
     }
-}
+};
 
 export const getProductDetails = async(req,res)=>{
     try {

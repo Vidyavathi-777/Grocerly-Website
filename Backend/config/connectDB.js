@@ -6,14 +6,17 @@ if (!process.env.MONGODB_URI) {
     throw new Error("Please provide MongoDB URI in .env file");
 }
 
-async function connectDB() {
+const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URI);
-        console.log("MongoDB connected successfully");
+        const connection = await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log(`MongoDB connected: ${connection.connection.host}`);
     } catch (error) {
-        console.error("MongoDB connection error:", error);
+        console.error('Database connection failed:', error.message);
         process.exit(1);
     }
-}
+};
 
 export default connectDB;

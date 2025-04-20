@@ -6,7 +6,7 @@ export const addToCartItemController = async(req,res)=>{
         const  userId = req.userId
         const { productId } = req.body
         
-        if(!productId){
+        if(!productId){   
             return res.status(402).json({
                 message : "Provide productId",
                 error : true,
@@ -63,7 +63,7 @@ export const getCartItemController = async(req,res)=>{
             userId : userId
         }).populate('productId')
 
-        return response.json({
+        return res.json({
             data : cartItem,
             error : false,
             success : true

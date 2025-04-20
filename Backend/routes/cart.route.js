@@ -9,4 +9,4 @@ cartRouter.get("/get",auth,getCartItemController)
 cartRouter.put('/update-qty',auth,updateCartItemQtyController)
 cartRouter.delete('/delete-cart-item',auth,deleteCartItemQtyController)
 
-export default cartRouter
+export default cartRouter   
