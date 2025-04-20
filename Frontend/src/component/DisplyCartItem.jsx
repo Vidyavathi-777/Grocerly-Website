@@ -2,11 +2,11 @@ import React from 'react'
 import { IoClose } from 'react-icons/io5'
 import { Link, useNavigate } from 'react-router-dom'
 import { useGlobalContext } from '../provider/GlobalProvider'
-import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees'
+import { DisplayPriceInRupees } from '../utilis/DisplayPriceInRupees'
 import { FaCaretRight } from "react-icons/fa";
 import { useSelector } from 'react-redux'
 import AddToCartButton from './AddToCartButton'
-import { pricewithDiscount } from '../utils/PriceWithDiscount'
+import { pricewithDiscount } from '../utilis/PriceWithDiscount'
 import imageEmpty from '../assets/empty_cart.webp'
 import toast from 'react-hot-toast'
 

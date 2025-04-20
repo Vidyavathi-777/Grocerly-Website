@@ -15,7 +15,7 @@ const UseMobile =(breakpoint = 768)=>{
         return()=>{
             window.removeEventListener('resize',handleResize)
         }
-    })
+    },[])
 
     return [isMobile]
 

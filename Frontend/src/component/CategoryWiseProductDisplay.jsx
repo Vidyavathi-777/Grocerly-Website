@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, } from 'react-router-dom'
-import AxiosToastError from '../utils/AxiosToastError'
-import Axios from '../utils/Axios'
+import AxiosToastError from '../utilis/AxiousToastError'
+import Axios from '../utilis/Axios'
 import SummaryApi from '../common/SummaryApi'
 import CardLoading from './CardLoading'
 import CardProduct from './CardProduct'
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { useSelector } from 'react-redux'
-import { valideURLConvert } from '../utils/valideURLConvert'
+import { valideURLConvert } from '../utilis/validURLConvert'
 
 const CategoryWiseProductDisplay = ({ id, name }) => {
     const [data, setData] = useState([])
