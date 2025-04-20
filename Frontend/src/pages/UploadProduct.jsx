@@ -109,39 +109,42 @@ const UploadProduct = () => {
     setOpenAddField(false)
   }
 
-  const handleSubmit = async(e)=>{
-    e.preventDefault()
-    console.log("data",data)
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const submitData = {
+      ...data,
+      category: data.category.map((cat) => cat._id),
+      subCategory: data.subCategory.map((sub) => sub._id),
+    };
+  
     try {
       const response = await Axios({
-          ...SummaryApi.createProduct,
-          data : data
-      })
-      const { data : responseData} = response
-
-      if(responseData.success){
-          successAlert(responseData.message)
-          setData({
-            name : "",
-            image : [],
-            category : [],
-            subCategory : [],
-            unit : "",
-            stock : "",
-            price : "",
-            discount : "",
-            description : "",
-            more_details : {},
-          })
-
+        ...SummaryApi.createProduct,
+        data: submitData,
+      });
+  
+      const { data: responseData } = response;
+  
+      if (responseData.success) {
+        successAlert(responseData.message);
+        setData({
+          name: "",
+          image: [],
+          category: [],
+          subCategory: [],
+          unit: "",
+          stock: "",
+          price: "",
+          discount: "",
+          description: "",
+          more_details: {},
+        });
       }
     } catch (error) {
-        AxiosToastError(error)
+      AxiosToastError(error);
     }
-
-
-  }
+  };
 
   // useEffect(()=>{
   //   successAlert("Upload successfully")

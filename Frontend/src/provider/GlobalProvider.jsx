@@ -30,7 +30,7 @@ function GlobalProvider ({children})  {
     
           if(responseData.success){
             dispatch(handleAddItemCart(responseData.data))
-            console.log(responseData)
+            // console.log(responseData)
           }
     
         } catch (error) {

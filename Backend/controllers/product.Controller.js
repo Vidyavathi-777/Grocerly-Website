@@ -150,7 +150,7 @@ export const getProductByCategoryAndSubCategory = async (req, res) => {
 
         const products = await ProductModel.find({
             category: categoryObjectId,
-            subCategory: subCategoryObjectId,
+            subcategory: subCategoryObjectId, // Ensure this matches the schema
         })
             .skip(skip)
             .limit(limit)
@@ -158,7 +158,7 @@ export const getProductByCategoryAndSubCategory = async (req, res) => {
 
         const totalCount = await ProductModel.countDocuments({
             category: categoryObjectId,
-            subCategory: subCategoryObjectId,
+            subcategory: subCategoryObjectId, // Ensure this matches the schema
         });
 
         return res.status(200).json({
@@ -180,6 +180,7 @@ export const getProductByCategoryAndSubCategory = async (req, res) => {
         });
     }
 };
+
 
 export const getProductDetails = async(req,res)=>{
     try {

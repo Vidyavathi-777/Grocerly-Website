@@ -34,7 +34,10 @@ const ProductListPage = () => {
           page: page,
           limit: 8,
         }
+        
+        
       });
+      
 
       const { data: responseData } = response;
 
@@ -53,14 +56,19 @@ const ProductListPage = () => {
     }
   };
 
+  
+
   useEffect(() => {
     setPage(1);
     setData([]); // reset when subcategory changes
   }, [params]);
 
   useEffect(() => {
+    if (page === 1) {
+      setData([]); // Clear data before first fetch
+    }
     fetchProductdata();
-  }, [params, page]);
+  }, [page, params]);
 
   useEffect(() => {
     const sub = AllSubCategory.filter(s => {
