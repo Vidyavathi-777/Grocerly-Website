@@ -46,6 +46,7 @@ const UserMenu = ({close}) => {
       }
     }
   return (
+    
     <div>
       <div className='font-semibold'>My Account</div>
       <div className='text-sm flex items-center gap-2'>
@@ -55,13 +56,13 @@ const UserMenu = ({close}) => {
       <div className='text-sm grid gap-2 '>
         <Link onClick={handleClose} to={"/dashboard/category"} className="px-2 hover:bg-orange-200 py-1">Category</Link>
         <Link onClick={handleClose} to={"/dashboard/subcategory"} className="px-2 hover:bg-orange-200 py-1">Sub Category</Link>
-        <Link onClick={handleClose} to={"/dashboard/uploaded-product"} className="px-2 hover:bg-orange-200 py-1">Upload Product</Link>
-        <Link onClick={handleClose} to={"/dashboard/products"} className="px-2 hover:bg-orange-200 py-1">Products</Link>
+        <Link onClick={handleClose} to={"/dashboard/upload-product"} className="px-2 hover:bg-orange-200 py-1">Upload Product</Link>
+        <Link onClick={handleClose} to={"/dashboard/product"} className="px-2 hover:bg-orange-200 py-1">Products</Link>
         <Link onClick={handleClose} to={"/dashboard/myorders"} className="px-2 hover:bg-orange-200 py-1">My Orders</Link>
         <Link onClick={handleClose} to={"/dashboard/address"} className="px-2 hover:bg-orange-200 py-1">Save Address</Link>
         <button onClick={handleLogout} className='text-left px-2 hover:bg-orange-800 py-1' >Log Out</button>
       </div>
-    </div>
+    </div>  
   )
 }
 

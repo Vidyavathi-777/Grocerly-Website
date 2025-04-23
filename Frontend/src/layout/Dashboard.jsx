@@ -18,6 +18,21 @@ const Dashboard = () => {
       </main>
     </div>
   )
+
+  // return(
+  //   <section className='bg-white'>
+  //     <div className='container mx-auto p-3 grid lg:grid-cols-[250px,1fr]'>
+  //       <div className='py-4 sticky top-24 overflow-y-auto hidden lg:block border-r'>
+  //         <UserMenu />
+  //       </div>
+  //       <div className='bg-white min-h-[75vh]'>
+  //         <Outlet />
+
+  //       </div>
+
+  //     </div>
+  //   </section>
+  // )
 }
 
 export default Dashboard

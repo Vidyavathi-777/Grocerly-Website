@@ -16,7 +16,7 @@ const CategoryPage = () => {
     const [categoryData,setCategoryData] = useState([])
     const [openEdit,setOpenEdit] = useState(false)
     const [editData,setEditData] = useState({
-        name : "",
+        name : "",  
         image : "",
     })
     const [openConfimBoxDelete,setOpenConfirmBoxDelete] = useState(false)

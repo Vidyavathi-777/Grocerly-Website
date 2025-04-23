@@ -18,7 +18,7 @@ const EditCategory = ({close, fetchData,data : CategoryData}) => {
         const { name, value} = e.target
 
         setData((preve)=>{
-            return{
+            return{  
                 ...preve,
                 [name] : value
             }
