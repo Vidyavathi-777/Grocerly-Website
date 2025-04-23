@@ -18,7 +18,7 @@ const UploadProduct = () => {
       name : "",
       image : [],
       category : [],
-      subCategory : [],
+      subcategory : [],
       unit : "",
       stock : "",
       price : "",
@@ -87,7 +87,7 @@ const UploadProduct = () => {
     })
   }
   const handleRemoveSubCategory = async(index)=>{
-      data.subCategory.splice(index,1)
+      data.subcategory.splice(index,1)
       setData((preve)=>{
         return{
           ...preve
@@ -115,7 +115,7 @@ const UploadProduct = () => {
     const submitData = {
       ...data,
       category: data.category.map((cat) => cat._id),
-      subCategory: data.subCategory.map((sub) => sub._id),
+      subcategory: data.subcategory.map((sub) => sub._id),
     };
   
     try {
@@ -132,7 +132,7 @@ const UploadProduct = () => {
           name: "",
           image: [],
           category: [],
-          subCategory: [],
+          subcategory: [],
           unit: "",
           stock: "",
           price: "",
@@ -303,7 +303,7 @@ const UploadProduct = () => {
                     </select>
                     <div className='flex flex-wrap gap-3'>
                       {
-                        data.subCategory.map((c,index)=>{
+                        data.subcategory.map((c,index)=>{
                           return(
                             <div key={c._id+index+"productsection"} className='text-sm flex items-center gap-1 bg-blue-50 mt-2'>
                               <p>{c.name}</p>
