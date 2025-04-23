@@ -1,10 +1,13 @@
 import CategoryModel from "../models/category.model.js";
 import SubCategoryModel from "../models/subCategory.model.js";
 import ProductModel from "../models/product.model.js";
+import uploadImageCloudinary from "../utilis/uploadImageCloudinary.js";
 
 export const AddCategoryController = async(req,res)=>{
     try {
-        const { name , image } = req.body 
+        const { name,image } = req.body  
+
+        // const image = req.file;
 
         if(!name || !image){
             return res.status(400).json({
@@ -14,12 +17,16 @@ export const AddCategoryController = async(req,res)=>{
             })
         }
 
-        const addCategory = new CategoryModel({
+        // const upload = await uploadImageCloudinary(image);
+
+        const newCategory = new CategoryModel({
             name,
-            image
+            image: image,
         })
 
-        const saveCategory = await addCategory.save()
+       
+
+        const saveCategory = await newCategory.save()
 
         if(!saveCategory){
             return res.status(500).json({
@@ -107,7 +114,7 @@ export const deleteCategoryController = async(req,res)=>{
         }).countDocuments()
 
         if(checkSubCategory >  0 || checkProduct > 0 ){
-            return response.status(400).json({
+            return res.status(400).json({
                 message : "Category is already use can't delete",
                 error : true,
                 success : false
