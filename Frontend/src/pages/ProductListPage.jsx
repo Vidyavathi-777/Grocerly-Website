@@ -60,12 +60,12 @@ const ProductListPage = () => {
 
   useEffect(() => {
     setPage(1);
-    setData([]); // reset when subcategory changes
+    setData([]); 
   }, [params]);
 
   useEffect(() => {
     if (page === 1) {
-      setData([]); // Clear data before first fetch
+      setData([]); 
     }
     fetchProductdata();
   }, [page, params]);

@@ -9,7 +9,7 @@ export const createProductController = async(req,res)=>{
             name ,
             image ,
             category,
-            subCategory,
+            subcategory,
             unit,
             stock,
             price,
@@ -18,7 +18,7 @@ export const createProductController = async(req,res)=>{
             more_details,
         } = req.body 
 
-        if(!name || !image[0] || !category[0] || !subCategory[0] || !unit || !price || !description ){
+        if(!name || !image[0] || !category[0] || !subcategory[0] || !unit || !price || !description ){
             return res.status(400).json({
                 message : "Enter required fields",
                 error : true,
@@ -30,7 +30,7 @@ export const createProductController = async(req,res)=>{
             name ,
             image ,
             category,
-            subCategory,
+            subcategory,
             unit,
             stock,
             price,
@@ -78,7 +78,7 @@ export const getProductController = async(req,res)=>{
         const skip = (page - 1) * limit
 
         const [data,totalCount] = await Promise.all([
-            ProductModel.find(query).sort({createdAt : -1 }).skip(skip).limit(limit).populate('category subCategory'),
+            ProductModel.find(query).sort({createdAt : -1 }).skip(skip).limit(limit).populate('category subcategory'),
             ProductModel.countDocuments(query)
         ])
 
@@ -132,10 +132,10 @@ export const getProductByCategory = async(req,res)=>{
 
 export const getProductByCategoryAndSubCategory = async (req, res) => {
     try {
-        const { categoryId, subCategoryId, page = 1, limit = 10 } = req.body;
+        const { categoryId, subcategoryId, page = 1, limit = 10 } = req.body;
 
         // Validate ObjectIds
-        if (!mongoose.Types.ObjectId.isValid(categoryId) || !mongoose.Types.ObjectId.isValid(subCategoryId)) {
+        if (!mongoose.Types.ObjectId.isValid(categoryId) || !mongoose.Types.ObjectId.isValid(subcategoryId)) {
             return res.status(400).json({
                 message: "Invalid categoryId or subCategoryId",
                 error: true,
@@ -144,13 +144,13 @@ export const getProductByCategoryAndSubCategory = async (req, res) => {
         }
 
         const categoryObjectId = new mongoose.Types.ObjectId(categoryId);
-        const subCategoryObjectId = new mongoose.Types.ObjectId(subCategoryId);
+        const subcategoryObjectId = new mongoose.Types.ObjectId(subcategoryId);
 
         const skip = (page - 1) * limit;
 
         const products = await ProductModel.find({
             category: categoryObjectId,
-            subcategory: subCategoryObjectId, // Ensure this matches the schema
+            subcategory: subcategoryObjectId, 
         })
             .skip(skip)
             .limit(limit)
@@ -158,7 +158,7 @@ export const getProductByCategoryAndSubCategory = async (req, res) => {
 
         const totalCount = await ProductModel.countDocuments({
             category: categoryObjectId,
-            subcategory: subCategoryObjectId, // Ensure this matches the schema
+            subcategory: subcategoryObjectId, 
         });
 
         return res.status(200).json({
@@ -205,7 +205,7 @@ export const getProductDetails = async(req,res)=>{
     }
 }
 
-//update product
+
 export const updateProductDetails = async(req,res)=>{
     try {
         const { _id } = req.body 
@@ -238,7 +238,7 @@ export const updateProductDetails = async(req,res)=>{
     }
 }
 
-//delete product
+
 export const deleteProductDetails = async(req,res)=>{
     try {
         const { _id } = req.body 
@@ -268,7 +268,7 @@ export const deleteProductDetails = async(req,res)=>{
     }
 }
 
-//search product
+
 export const searchProduct = async(req,res)=>{
     try {
         let { search, page , limit } = req.body 
@@ -289,7 +289,7 @@ export const searchProduct = async(req,res)=>{
         const skip = ( page - 1) * limit
 
         const [data,dataCount] = await Promise.all([
-            ProductModel.find(query).sort({ createdAt  : -1 }).skip(skip).limit(limit).populate('category subCategory'),
+            ProductModel.find(query).sort({ createdAt  : -1 }).skip(skip).limit(limit).populate('category subcategory'),
             ProductModel.countDocuments(query)
         ])
 
