@@ -286,7 +286,7 @@ const UploadProduct = () => {
                         setData((preve)=>{
                           return{
                             ...preve,
-                            subCategory : [...preve.subCategory,subCategory]
+                            subcategory : [...preve.subcategory,subCategory]
                           }
                         })
                         setSelectSubCategory("")
