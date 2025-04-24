@@ -61,7 +61,7 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
           return sub?.category?.some(c => c._id == id);
         });
       
-        if (!subcategory) return '#';
+        if (!subcategory || !subcategory.name || !subcategory._id || !name || !id) return '#';
       
         const url = `/${valideURLConvert(name)}-${id}/${valideURLConvert(subcategory.name)}-${subcategory._id}`;
         return url;
