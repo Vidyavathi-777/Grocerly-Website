@@ -13,7 +13,7 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const containerRef = useRef()
-    const subCategoryData = useSelector(state => state.product.allSubCategory)
+    const subcategoryData = useSelector(state => state.product.allSubcategory)
     const loadingCardNumber = new Array(6).fill(null)
 
     const fetchCategoryWiseProduct = async () => {
@@ -40,7 +40,7 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
 
     useEffect(() => {
         fetchCategoryWiseProduct()
-    }, [])
+    }, [id])
 
     const handleScrollRight = () => {
         containerRef.current.scrollLeft += 200
@@ -55,8 +55,8 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
   
 
   const handleRedirectProductListpage = ()=>{
-      const subcategory = subCategoryData.find(sub =>{
-        const filterData = sub.category.some(c => {
+      const subcategory = subcategoryData.find(sub =>{
+        const filterData = sub.category?.some(c => {
           return c._id == id
         })
 
