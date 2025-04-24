@@ -10,7 +10,7 @@ const CartMobileLink = () => {
     const { totalPrice, totalQty } = useGlobalContext()
     const cartItem = useSelector(state => state.cartItem.cart)
 
-  return (
+  return ( 
     <>
         {
             cartItem[0] && (
