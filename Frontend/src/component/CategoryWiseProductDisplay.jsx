@@ -9,7 +9,7 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { useSelector } from 'react-redux'
 import { valideURLConvert } from '../utilis/validURLConvert'
 
-const CategoryWiseProductDisplay = ({ id, name }) => {
+const CategoryWiseProductDisplay = ({ id, name }) => { 
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const containerRef = useRef()
