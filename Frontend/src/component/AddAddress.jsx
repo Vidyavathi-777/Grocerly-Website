@@ -31,6 +31,9 @@ const AddAddress = ({close}) => {
             
             if(responseData.success){
                 toast.success(responseData.message)
+                if (fetchAddress) {
+                    await fetchAddress(); 
+                  }
                 if(close){
                     close()
                     reset()

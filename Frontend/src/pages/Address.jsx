@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import AddAddress from '../component/AddAddress'
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
@@ -9,6 +9,7 @@ import SummaryApi from '../common/SummaryApi';
 import toast from 'react-hot-toast';
 import AxiosToastError from '../utilis/AxiousToastError';
 import { useGlobalContext } from '../provider/GlobalProvider';
+import { handleAddAddress } from '../redux/addressSlice';
 
 const Address = () => {
   const addressList = useSelector(state => state.addresses.addressList)
@@ -16,6 +17,22 @@ const Address = () => {
   const [OpenEdit,setOpenEdit] = useState(false)
   const [editData,setEditData] = useState({})
   const { fetchAddress} = useGlobalContext()
+  const dispatch = useDispatch()
+
+  const fetchAddressList = async()=>{
+    try{
+      const response = await Axios(SummaryApi.getAddress)
+      if(response.data.success){
+        dispatch(handleAddAddress(response.data.data))
+      }
+    }catch(error){
+      AxiosToastError(error)
+    }
+  }
+
+  useEffect(() =>{
+    fetchAddressList()
+  },[])
 
   const handleDisableAddress = async(id)=>{
     try {
@@ -44,12 +61,10 @@ const Address = () => {
             </button>
         </div>
         <div className='bg-blue-50 p-2 grid gap-4'>
-              {
-                addressList
-                .filter(address => address.status != false)
-                .map((address,index)=>{
-                  return(
-                      <div key={address._id} className=  {`border rounded p-3 flex gap-3 bg-white`}>
+              { addressList && addressList.length > 0 ? (
+                addressList .filter(address => address.status != false) .map((address,index)=>(
+                  
+                      <div key={address._id} className={`border rounded p-3 flex gap-3 bg-white `}>
                           <div className='w-full'>
                             <p>{address.address_line}</p>
                             <p>{address.city}</p>
@@ -71,8 +86,10 @@ const Address = () => {
                             </button>
                           </div>
                       </div>
-                  )
-                })
+                  ))
+                ) : (
+                  <p>No Address Available</p>
+                )
               }
               <div onClick={()=>setOpenAddress(true)} className='h-16 bg-blue-50 border-2 border-dashed flex justify-center items-center cursor-pointer'>
                 Add address
