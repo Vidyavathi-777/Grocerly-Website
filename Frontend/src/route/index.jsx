@@ -19,7 +19,7 @@ import ProductAdmin from "../pages/ProductAdmin";
 import AdminPermision from "../layout/AdminPermision";
 import ProductListPage from "../pages/ProductListPage";
 import ProductDisplayPage from "../pages/ProductDisplayPage";
-import CartMobileLink from "../component/CartMobile";
+import CartMobile from "../pages/CartMobile"
 import CheckoutPage from "../pages/CheckoutPage";
 import Success from "../pages/Success";
 import Cancel from "../pages/Cancel";
@@ -110,7 +110,7 @@ const router = createBrowserRouter([
             },
             {
                 path : 'cart',
-                element : <CartMobileLink/>
+                element : <CartMobile/>
             },
             {
                 path : "checkout",

@@ -19,7 +19,7 @@ const Address = () => {
 
   const handleDisableAddress = async(id)=>{
     try {
-      const response = await Axios({
+      const response = await Axios({ 
         ...SummaryApi.disableAddress,
         data : {
           _id : id

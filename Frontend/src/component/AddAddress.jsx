@@ -11,8 +11,8 @@ const AddAddress = ({close}) => {
     const { register, handleSubmit,reset } = useForm()
     const { fetchAddress } = useGlobalContext()
 
-    const onSubmit = async(data)=>{
-        console.log("data",data)
+    const onSubmit = async(data)=>{ 
+        // console.log("data",data)
     
         try {
             const response = await Axios({
