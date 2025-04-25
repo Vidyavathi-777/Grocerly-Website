@@ -11,8 +11,8 @@ import mongoose from "mongoose";
 
         const payload = list_items.map(el => {
             return({
-                userId : userId,
-                orderId : `ORD-${new mongoose.Types.ObjectId()}`,
+                userId : userId, 
+                orderId : `ORD-${new mongoose.Types.ObjectId().toString()}`,
                 productId : el.productId._id, 
                 product_details : {
                     name : el.productId.name,
@@ -67,7 +67,7 @@ export async function paymentController(request,response){
                     currency : 'inr',
                     product_data : {
                         name : item.productId.name,
-                        images : item.productId.image,
+                        images : [item.productId.image],
                         metadata : {
                             productId : item.productId._id
                         }
@@ -125,7 +125,7 @@ const getOrderProductItems = async({
 
             const paylod = {
                 userId : userId,
-                orderId : `ORD-${new mongoose.Types.ObjectId()}`,
+                orderId : `ORD-${new mongoose.Types.ObjectId().toString()}`,
                 productId : product.metadata.productId, 
                 product_details : {
                     name : product.name,
