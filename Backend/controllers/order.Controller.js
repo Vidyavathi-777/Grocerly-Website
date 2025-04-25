@@ -67,7 +67,7 @@ export async function paymentController(request,response){
                     currency : 'inr',
                     product_data : {
                         name : item.productId.name,
-                        images : [item.productId.image],
+                        images : item.productId.image,
                         metadata : {
                             productId : item.productId._id
                         }
