@@ -21,7 +21,7 @@ const Header = () => {
   const [openUserMenu,setOpenUserMenu] = useState(false)
   const cartItem = useSelector(state => state.cartItem.cart)
 
-  const user = useSelector((state) =>state?.user)
+  const user = useSelector((state) =>state?.user?.data)
   // console.log("userdata-eader",user)
 
   const { totalPrice, totalQty} = useGlobalContext()
@@ -44,6 +44,12 @@ const Header = () => {
     }
     
   }
+
+  useEffect(() => {
+    if (user?._id) {
+      setOpenUserMenu(true);
+    }
+  }, [user]);
 
   return (
     <header className="h-30 lg:h-25 shadow-md sticky top-0 z-40 flex  flex-col justify-center gap-1 bg-white">
