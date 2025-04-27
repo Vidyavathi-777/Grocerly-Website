@@ -37,7 +37,7 @@ const AddAddress = ({close}) => {
                 if(close){
                     close()
                     reset()
-                    fetchAddress()
+                    
                 }
             }
         } catch (error) {

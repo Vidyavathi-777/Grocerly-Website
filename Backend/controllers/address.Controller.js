@@ -98,6 +98,10 @@ export const deleteAddresscontroller = async(req,res)=>{
             status : false
         })
 
+        await UserModel.findByIdAndUpdate(userId,{
+            $pull:{address_details:_id}
+        })
+
         return res.json({
             message : "Address remove",
             error : false,
